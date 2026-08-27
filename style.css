@@ -1592,15 +1592,16 @@ Tidak menghilangkan CSS sidebar.
     border-bottom: none;
 }
 
-/* ============================================================
-   EDA - CHART CONTAINER FIX
-   ============================================================ */
+/* ALTair chart container - clean and safe */
 
 [data-testid="stVegaLiteChart"],
 [data-testid="stArrowVegaLiteChart"] {
     width: 100% !important;
+    max-width: 100% !important;
 
-    overflow: hidden !important;
+    box-sizing: border-box !important;
+
+    padding: 0.75rem 0.9rem 0.9rem 0.9rem !important;
 
     border-radius: 18px;
 
@@ -1619,13 +1620,5 @@ Tidak menghilangkan CSS sidebar.
         0 14px 30px
         rgba(0, 0, 0, 0.25);
 
-    padding: 0.8rem;
-}
-
-
-/* jangan kasih chart overflow keluar */
-[data-testid="stVegaLiteChart"] > div,
-[data-testid="stArrowVegaLiteChart"] > div {
-    max-width: 100% !important;
-    overflow: hidden !important;
+    overflow: visible !important;
 }
