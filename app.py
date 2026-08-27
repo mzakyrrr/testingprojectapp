@@ -33,22 +33,49 @@ page_header(
 
 left, right = st.columns([1.2, 1], gap="large")
 
+# =========================
+# SECTION 01 - LEFT
+# =========================
 with left:
     section_title("01", "Kenapa Trimatch?")
+
     st.write(
         "Menentukan bentuk wajah sendiri tidak selalu mudah karena batas visual "
         "antara ovale, rectangular, round, dan square dapat terlihat mirip. "
         "Trimatch membantu proses tersebut melalui klasifikasi gambar wajah."
     )
 
-    section_title("02", "Cara Kerja Aplikasi")
+
+# =========================
+# SECTION 01 - RIGHT
+# =========================
+with right:
+    show_logo(width=340)
+
+    st.markdown("### Face-shape Classes")
+
+    st.write(
+        "Ovale · Rectangular · Round · Square"
+    )
+
+
+# =========================
+# SECTION 02 - FULL WIDTH
+# =========================
+st.markdown("<br>", unsafe_allow_html=True)
+
+section_title("02", "Cara Kerja Aplikasi")
 
 st.html("""
 <div class="process-grid">
 
     <div class="process-card">
         <div class="process-step">01</div>
-        <div class="process-title">Input Foto</div>
+
+        <div class="process-title">
+            Input Foto
+        </div>
+
         <div class="process-desc">
             Unggah gambar atau gunakan kamera untuk memulai analisis.
         </div>
@@ -56,7 +83,11 @@ st.html("""
 
     <div class="process-card">
         <div class="process-step">02</div>
-        <div class="process-title">Klasifikasi</div>
+
+        <div class="process-title">
+            Klasifikasi
+        </div>
+
         <div class="process-desc">
             Model menganalisis gambar dan menghasilkan probabilitas empat bentuk wajah.
         </div>
@@ -64,7 +95,11 @@ st.html("""
 
     <div class="process-card">
         <div class="process-step">03</div>
-        <div class="process-title">Rekomendasi</div>
+
+        <div class="process-title">
+            Rekomendasi
+        </div>
+
         <div class="process-desc">
             Hasil prediksi digunakan sebagai dasar rekomendasi hairstyle yang sesuai.
         </div>
@@ -73,13 +108,7 @@ st.html("""
 </div>
 """)
 
-with right:
-    show_logo(width=340)
-    st.markdown("### Face-shape classes")
-    st.write("Ovale · Rectangular · Round · Square")
-
 st.divider()
-
 section_title("Navigation", "Explore Trimatch")
 
 a, b, c = st.columns(3)
