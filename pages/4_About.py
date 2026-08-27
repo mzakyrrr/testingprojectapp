@@ -37,10 +37,10 @@ with left:
         "Hasil klasifikasi digunakan sebagai dasar rekomendasi hairstyle."
     )
 
-    section_title("Technology", "Built with")
+    section_title("Technology", "Built With")
     st.write("Python · TensorFlow/Keras · NumPy · Pandas · Streamlit")
 
-    section_title("Scope", "Fitur utama")
+    section_title("Scope", "Fitur Utama")
     st.markdown(
         """
         - Ringkasan EDA dataset.
@@ -55,7 +55,7 @@ with left:
 with right:
     show_logo(width=300)
 
-    section_title("Team", "Project members")
+    section_title("Team", "Project Members")
     st.write(
         """
         **Muhammad Cesar Rivaldo (Data Analyst)**  
@@ -67,7 +67,7 @@ with right:
 
 st.divider()
 
-section_title("Limitations", "Batasan aplikasi")
+section_title("Limitations", "Limitations & Disclaimer")
 st.write(
     "Klasifikasi bentuk wajah memiliki ambiguitas visual antarkelas. "
     "Hasil aplikasi sebaiknya digunakan sebagai bantuan rekomendasi, bukan penilaian absolut. "
