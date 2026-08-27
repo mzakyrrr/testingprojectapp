@@ -500,8 +500,8 @@ brightness_chart = (
         height=260,
         padding={
             "left": 10,
-            "right": 20,
-            "top": 15,
+            "right": 30,
+            "top": 20,
             "bottom": 10
         }
     )
