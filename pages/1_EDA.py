@@ -412,8 +412,8 @@ rgb_chart = (
         height=300,
         padding={
             "left": 10,
-            "right": 20,
-            "top": 10,
+            "right": 30,
+            "top": 20,
             "bottom": 10
         }
     )
