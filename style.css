@@ -935,3 +935,243 @@ a[aria-current="page"] p {
     color: #f1d89a;
     font-weight: 700;
 }
+
+/* ============================================================
+   HOME - NAVIGATION CARDS
+   ============================================================ */
+
+.nav-card {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 230px;
+
+    padding:
+        1.7rem
+        1.5rem
+        1.5rem
+        1.5rem;
+
+    border-radius: 22px;
+
+    border:
+        1px solid
+        rgba(216, 180, 106, 0.22);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(24, 21, 19, 0.96),
+            rgba(39, 30, 24, 0.90)
+        );
+
+    box-shadow:
+        0 14px 30px
+        rgba(0, 0, 0, 0.28);
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+}
+
+
+/* GOLD GLOW */
+
+.nav-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    right: -30px;
+    bottom: -30px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(216, 180, 106, 0.18),
+            transparent 68%
+        );
+}
+
+
+/* HOVER CARD */
+
+.nav-card:hover {
+
+    transform:
+        translateY(-6px);
+
+    border-color:
+        rgba(216, 180, 106, 0.50);
+
+    box-shadow:
+        0 20px 42px
+        rgba(0, 0, 0, 0.36);
+}
+
+
+/* ICON */
+
+.nav-card-icon {
+
+    font-size: 2rem;
+
+    margin-bottom: 1rem;
+
+}
+
+
+/* TITLE */
+
+.nav-card-title {
+
+    color: #f7f0e6;
+
+    font-size: 1.35rem;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+
+    margin-bottom: 0.85rem;
+
+}
+
+
+/* DESCRIPTION */
+
+.nav-card-desc {
+
+    color: #d6cec2;
+
+    font-size: 0.98rem;
+
+    line-height: 1.7;
+
+    max-width: 260px;
+
+}
+
+
+/* ============================================================
+   NAVIGATION BUTTONS
+   ============================================================ */
+
+/*
+Page link yang langsung mengikuti nav-card
+*/
+
+.nav-card + div {
+    margin-top: 0.8rem;
+}
+
+
+/* page link */
+
+[data-testid="stPageLink"] a {
+
+    border-radius: 14px !important;
+
+}
+
+
+/*
+Navigation button khusus area utama.
+Tidak menghilangkan CSS sidebar.
+*/
+
+.main [data-testid="stPageLink"] a {
+
+    min-height: 50px;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    border:
+        1px solid
+        rgba(216, 180, 106, 0.65) !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(216, 180, 106, 0.22),
+            rgba(69, 51, 35, 0.75)
+        ) !important;
+
+    box-shadow:
+        0 9px 20px
+        rgba(0, 0, 0, 0.28),
+
+        inset 0 1px 0
+        rgba(255, 240, 200, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease !important;
+}
+
+
+/* TEXT BUTTON */
+
+.main [data-testid="stPageLink"] p {
+
+    color: #f1d89a !important;
+
+    font-weight: 700 !important;
+
+    margin: 0 !important;
+
+}
+
+
+/* HOVER BUTTON */
+
+.main [data-testid="stPageLink"] a:hover {
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(241, 216, 154, 0.95) !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(216, 180, 106, 0.40),
+            rgba(102, 73, 43, 0.92)
+        ) !important;
+
+    box-shadow:
+        0 14px 26px
+        rgba(0, 0, 0, 0.36),
+
+        0 0 18px
+        rgba(216, 180, 106, 0.12);
+}
+
+
+/* hover text */
+
+.main [data-testid="stPageLink"] a:hover p {
+
+    color: #fff1c4 !important;
+}
