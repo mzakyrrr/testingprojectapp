@@ -285,7 +285,7 @@ with right:
             height=300,
             padding={
                 "left": 10,
-                "right": 20,
+                "right": 40,
                 "top": 10,
                 "bottom": 10
             }
