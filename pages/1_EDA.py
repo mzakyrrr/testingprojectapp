@@ -332,18 +332,199 @@ section_title("Color & Brightness", "Karakteristik warna rata-rata")
 
 color_df = color_stats_df(data)
 
-rgb = color_df.set_index("face_shape")[["mean_r", "mean_g", "mean_b"]]
-rgb.columns = ["Mean R", "Mean G", "Mean B"]
-st.bar_chart(rgb)
 
-brightness = color_df.set_index("face_shape")[["brightness"]]
-brightness.columns = ["Brightness"]
-st.line_chart(brightness)
+# =========================================================
+# RGB CHART
+# =========================================================
+
+rgb_chart_df = color_df.melt(
+    id_vars="face_shape",
+    value_vars=["mean_r", "mean_g", "mean_b"],
+    var_name="Channel",
+    value_name="Value"
+)
+
+rgb_chart = (
+    alt.Chart(rgb_chart_df)
+    .mark_bar(
+        cornerRadiusTopLeft=5,
+        cornerRadiusTopRight=5
+    )
+    .encode(
+        x=alt.X(
+            "face_shape:N",
+            title=None,
+            axis=alt.Axis(
+                labelColor="#D8D0C5",
+                labelFontSize=12,
+                labelPadding=10
+            )
+        ),
+
+        y=alt.Y(
+            "Value:Q",
+            title="Mean Pixel Value",
+            axis=alt.Axis(
+                labelColor="#BDB3A5",
+                titleColor="#D8D0C5",
+                gridColor="#2A241C",
+                tickColor="#5A4932",
+                domainColor="#5A4932"
+            )
+        ),
+
+        color=alt.Color(
+            "Channel:N",
+            scale=alt.Scale(
+                domain=["mean_r", "mean_g", "mean_b"],
+                range=[
+                    "#F1D89A",
+                    "#C89F52",
+                    "#8C693D"
+                ]
+            ),
+            legend=alt.Legend(
+                title=None,
+                orient="bottom",
+                labelColor="#D8D0C5"
+            )
+        ),
+
+        tooltip=[
+            alt.Tooltip(
+                "face_shape:N",
+                title="Face Shape"
+            ),
+            alt.Tooltip(
+                "Channel:N",
+                title="Channel"
+            ),
+            alt.Tooltip(
+                "Value:Q",
+                title="Mean Value",
+                format=".1f"
+            )
+        ]
+    )
+
+    .properties(
+        width="container",
+        height=300,
+        padding={
+            "left": 10,
+            "right": 20,
+            "top": 10,
+            "bottom": 10
+        }
+    )
+
+    .configure_view(
+        stroke=None,
+        fill="transparent"
+    )
+
+    .configure(
+        background="transparent"
+    )
+)
+
+st.altair_chart(
+    rgb_chart,
+    use_container_width=True
+)
+
+
+# =========================================================
+# BRIGHTNESS CHART
+# =========================================================
+
+brightness_chart = (
+    alt.Chart(color_df)
+    .mark_line(
+        color="#F1D89A",
+        strokeWidth=3.5,
+        point=alt.OverlayMarkDef(
+            filled=True,
+            fill="#F1D89A",
+            stroke="#8C693D",
+            strokeWidth=2,
+            size=110
+        )
+    )
+
+    .encode(
+        x=alt.X(
+            "face_shape:N",
+            title=None,
+            axis=alt.Axis(
+                labelColor="#D8D0C5",
+                labelFontSize=12,
+                labelPadding=10
+            )
+        ),
+
+        y=alt.Y(
+            "brightness:Q",
+            title="Mean Brightness",
+
+            # SKALA DIPERSEMPIT
+            scale=alt.Scale(
+                domain=[110, 121],
+                zero=False
+            ),
+
+            axis=alt.Axis(
+                labelColor="#BDB3A5",
+                titleColor="#D8D0C5",
+                gridColor="#2A241C",
+                tickColor="#5A4932",
+                domainColor="#5A4932"
+            )
+        ),
+
+        tooltip=[
+            alt.Tooltip(
+                "face_shape:N",
+                title="Face Shape"
+            ),
+            alt.Tooltip(
+                "brightness:Q",
+                title="Brightness",
+                format=".1f"
+            )
+        ]
+    )
+
+    .properties(
+        width="container",
+        height=260,
+        padding={
+            "left": 10,
+            "right": 20,
+            "top": 15,
+            "bottom": 10
+        }
+    )
+
+    .configure_view(
+        stroke=None,
+        fill="transparent"
+    )
+
+    .configure(
+        background="transparent"
+    )
+)
+
+st.altair_chart(
+    brightness_chart,
+    use_container_width=True
+)
+
 
 st.caption(
     "Statistik warna pada notebook EDA dihitung dari sampel gambar per kelas."
 )
-
 st.divider()
 
 section_title("Data Quality", "Duplicate dan pemeriksaan gambar bermasalah")
