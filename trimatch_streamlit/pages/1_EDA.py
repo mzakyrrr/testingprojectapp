@@ -1,0 +1,169 @@
+import streamlit as st
+
+from utils.style import apply_global_style, show_logo, page_header, section_title
+from utils.eda import (
+    load_eda_summary,
+    class_distribution_df,
+    resolution_stats_df,
+    top_resolutions_df,
+    color_stats_df,
+)
+
+st.set_page_config(
+    page_title="EDA | Trimatch",
+    page_icon="📊",
+    layout="wide",
+)
+
+apply_global_style()
+data = load_eda_summary()
+
+with st.sidebar:
+    show_logo(width=165)
+    st.markdown("### Trimatch")
+    st.caption("Your Style, Your Cut")
+    st.divider()
+    st.page_link("app.py", label="Home", icon="🏠")
+    st.page_link("pages/1_EDA.py", label="Explore the Data", icon="📊")
+    st.page_link("pages/2_Model_Performance.py", label="Model & Performance", icon="🧠")
+    st.page_link("pages/3_Prediction.py", label="Find My Hairstyle", icon="✂️")
+    st.page_link("pages/4_About.py", label="About Trimatch", icon="ℹ️")
+
+page_header(
+    "Explore the Data",
+    "Exploratory Data Analysis",
+    "Statistik dan visualisasi utama dari EDA_full.ipynb. "
+    "Dataset mentah tidak perlu dimuat ulang saat aplikasi dijalankan.",
+)
+
+section_title("Dataset Overview", "Gambaran umum dataset")
+m1, m2, m3, m4 = st.columns(4)
+m1.metric("Total valid images", f'{data["raw_total"]:,}')
+m2.metric("Training set", f'{data["train_total"]:,}')
+m3.metric("Testing set", f'{data["test_total"]:,}')
+m4.metric("Corrupt images", data["corrupt_images"])
+
+st.caption(
+    "EDA mencatat seluruh gambar yang terbaca berada pada mode RGB. "
+    "Distribusi kelas secara total relatif seimbang."
+)
+
+st.divider()
+
+section_title("Class Distribution", "Distribusi gambar per bentuk wajah")
+
+class_df = class_distribution_df(data)
+plot_df = class_df.set_index("face_shape")[["training", "testing"]]
+st.bar_chart(plot_df)
+
+with st.expander("Lihat angka distribusi"):
+    view = class_df.rename(
+        columns={
+            "face_shape": "Face Shape",
+            "training": "Training",
+            "testing": "Testing",
+            "total": "Total",
+        }
+    )
+    st.dataframe(view, use_container_width=True, hide_index=True)
+
+st.markdown(
+    """
+    **Insight:** jumlah data antarkelas relatif seimbang secara total. Namun,
+    komposisi training dan testing tidak identik pada setiap kelas.
+    """
+)
+
+st.divider()
+
+section_title("Image Dimensions", "Karakteristik resolusi gambar")
+
+left, right = st.columns([1, 1.15], gap="large")
+
+with left:
+    res_df = resolution_stats_df(data).rename(
+        columns={
+            "statistic": "Statistic",
+            "width": "Width (px)",
+            "height": "Height (px)",
+            "megapixels": "Megapixels",
+        }
+    )
+    st.dataframe(res_df, use_container_width=True, hide_index=True)
+
+    st.metric("Unique resolutions", data["quality"]["unique_resolutions"])
+    st.caption(
+        "Dataset memiliki variasi resolusi yang besar, sehingga proses resize "
+        "sebelum masuk ke model menjadi penting."
+    )
+
+with right:
+    st.markdown("**10 resolusi paling umum**")
+    top_df = top_resolutions_df(data)
+    st.bar_chart(top_df.set_index("resolution"))
+
+st.divider()
+
+section_title("Image File Size", "Ukuran file dan outlier")
+
+fs = data["file_size"]
+c1, c2, c3, c4 = st.columns(4)
+c1.metric("Mean", f'{fs["mean_kb"]:.1f} KB')
+c2.metric("Median", f'{fs["median_kb"]:.1f} KB')
+c3.metric("Maximum", f'{fs["max_kb"]:,.1f} KB')
+c4.metric("IQR outliers", fs["iqr_outliers"])
+
+st.write(
+    "Distribusi ukuran file cukup lebar. Nilai median jauh di bawah nilai maksimum, "
+    "menunjukkan adanya sejumlah file berukuran jauh lebih besar dari mayoritas data."
+)
+
+st.divider()
+
+section_title("Color & Brightness", "Karakteristik warna rata-rata")
+
+color_df = color_stats_df(data)
+
+rgb = color_df.set_index("face_shape")[["mean_r", "mean_g", "mean_b"]]
+rgb.columns = ["Mean R", "Mean G", "Mean B"]
+st.bar_chart(rgb)
+
+brightness = color_df.set_index("face_shape")[["brightness"]]
+brightness.columns = ["Brightness"]
+st.line_chart(brightness)
+
+st.caption(
+    "Statistik warna pada notebook EDA dihitung dari sampel gambar per kelas."
+)
+
+st.divider()
+
+section_title("Data Quality", "Duplicate dan pemeriksaan gambar bermasalah")
+
+dup = data["duplicates"]
+q1, q2, q3, q4 = st.columns(4)
+q1.metric("Exact duplicate groups", dup["exact_duplicate_groups"])
+q2.metric("Duplicate files", dup["duplicate_files"])
+q3.metric("Cross-split leakage", dup["cross_split_leakage"])
+q4.metric("Conflicting labels", dup["conflicting_duplicate_labels"])
+
+quality = data["quality"]
+q5, q6 = st.columns(2)
+q5.metric("Images < 50 px", quality["images_under_50px"])
+q6.metric("Extreme aspect ratio", quality["extreme_aspect_ratio"])
+
+st.success(
+    "Tidak ditemukan exact duplicate yang menyeberang dari training_set ke testing_set "
+    "dan tidak ditemukan exact duplicate dengan label kelas yang berbeda."
+)
+
+st.markdown(
+    """
+    **Key findings**
+    - Dataset awal berisi 1.312 gambar valid dan tidak ditemukan file corrupt.
+    - Distribusi kelas relatif seimbang secara total.
+    - Terdapat variasi resolusi yang besar.
+    - Exact duplicate ditemukan di dalam dataset, tetapi tidak melintasi split.
+    - Tidak ditemukan gambar yang sangat kecil atau aspect ratio ekstrem berdasarkan threshold EDA.
+    """
+)
