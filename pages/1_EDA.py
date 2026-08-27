@@ -190,19 +190,115 @@ with left:
             "megapixels": "Megapixels",
         }
     )
-    st.dataframe(res_df, use_container_width=True, hide_index=True)
 
-    st.metric("Unique resolutions", data["quality"]["unique_resolutions"])
+    table_html = """
+    <div class="trimatch-table-wrap">
+        <table class="trimatch-table">
+            <thead>
+                <tr>
+                    <th>Statistic</th>
+                    <th>Width (px)</th>
+                    <th>Height (px)</th>
+                    <th>Megapixels</th>
+                </tr>
+            </thead>
+            <tbody>
+    """
+
+    for _, row in res_df.iterrows():
+        table_html += f"""
+                <tr>
+                    <td class="shape-name">{row["Statistic"]}</td>
+                    <td>{row["Width (px)"]}</td>
+                    <td>{row["Height (px)"]}</td>
+                    <td class="total-value">{row["Megapixels"]}</td>
+                </tr>
+        """
+
+    table_html += """
+            </tbody>
+        </table>
+    </div>
+    """
+
+    st.html(table_html)
+
+    st.metric(
+        "Unique resolutions",
+        data["quality"]["unique_resolutions"]
+    )
+
     st.caption(
         "Dataset memiliki variasi resolusi yang besar, sehingga proses resize "
         "sebelum masuk ke model menjadi penting."
     )
 
+
 with right:
     st.markdown("**10 resolusi paling umum**")
-    top_df = top_resolutions_df(data)
-    st.bar_chart(top_df.set_index("resolution"))
 
+    top_df = top_resolutions_df(data)
+
+    resolution_chart = (
+        alt.Chart(top_df)
+        .mark_bar(
+            color="#C89F52",
+            cornerRadiusTopLeft=6,
+            cornerRadiusTopRight=6
+        )
+        .encode(
+            x=alt.X(
+                "resolution:N",
+                title=None,
+                sort="-y",
+                axis=alt.Axis(
+                    labelColor="#D8D0C5",
+                    labelAngle=-45,
+                    labelFontSize=11,
+                    labelPadding=8
+                )
+            ),
+            y=alt.Y(
+                "count:Q",
+                title="Jumlah Gambar",
+                axis=alt.Axis(
+                    labelColor="#BDB3A5",
+                    titleColor="#D8D0C5",
+                    gridColor="#2A241C",
+                    tickColor="#5A4932",
+                    domainColor="#5A4932"
+                )
+            ),
+            tooltip=[
+                alt.Tooltip(
+                    "resolution:N",
+                    title="Resolution"
+                ),
+                alt.Tooltip(
+                    "count:Q",
+                    title="Jumlah"
+                )
+            ]
+        )
+        .properties(
+            height=330
+        )
+        .configure_view(
+            stroke="#5A4932",
+            strokeWidth=1,
+            cornerRadius=16,
+            fill="#0F0E0D"
+        )
+        .configure(
+            background="transparent"
+        )
+    )
+
+    st.altair_chart(
+        resolution_chart,
+        use_container_width=True
+    )
+    
 st.divider()
 
 section_title("Image File Size", "Ukuran file dan outlier")
