@@ -281,13 +281,12 @@ with right:
             ]
         )
         .properties(
-            height=330
+            width="container",
+            height=300
         )
         .configure_view(
-            stroke="#5A4932",
-            strokeWidth=1,
-            cornerRadius=16,
-            fill="#0F0E0D"
+            stroke=None,
+            fill="#transparent"
         )
         .configure(
             background="transparent"
