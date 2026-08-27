@@ -41,30 +41,38 @@ with left:
         "Trimatch membantu proses tersebut melalui klasifikasi gambar wajah."
     )
 
-    section_title("02", "Cara kerja aplikasi")
-    c1, c2, c3 = st.columns(3)
+    ssection_title("02", "Cara Kerja Aplikasi")
 
-    with c1:
-        st.markdown(
-            '<div class="info-card"><b>1. Input foto</b><br><br>'
-            'Unggah gambar atau gunakan kamera.</div>',
-            unsafe_allow_html=True,
-        )
+st.markdown(
+    """
+    <div class="process-grid">
+        <div class="process-card">
+            <div class="process-step">01</div>
+            <div class="process-title">Input Foto</div>
+            <div class="process-desc">
+                Unggah gambar atau gunakan kamera untuk memulai analisis.
+            </div>
+        </div>
 
-    with c2:
-        st.markdown(
-            '<div class="info-card"><b>2. Klasifikasi</b><br><br>'
-            'Model menghasilkan probabilitas empat bentuk wajah.</div>',
-            unsafe_allow_html=True,
-        )
+        <div class="process-card">
+            <div class="process-step">02</div>
+            <div class="process-title">Klasifikasi</div>
+            <div class="process-desc">
+                Model menganalisis gambar dan menghasilkan probabilitas empat bentuk wajah.
+            </div>
+        </div>
 
-    with c3:
-        st.markdown(
-            '<div class="info-card"><b>3. Rekomendasi</b><br><br>'
-            'Hasil prediksi dipakai sebagai dasar rekomendasi hairstyle.</div>',
-            unsafe_allow_html=True,
-        )
-
+        <div class="process-card">
+            <div class="process-step">03</div>
+            <div class="process-title">Rekomendasi</div>
+            <div class="process-desc">
+                Hasil prediksi digunakan sebagai dasar rekomendasi hairstyle yang sesuai.
+            </div>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 with right:
     show_logo(width=340)
     st.markdown("### Face-shape classes")
