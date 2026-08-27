@@ -126,6 +126,7 @@ st.altair_chart(
 )
 
 with st.expander("Lihat angka distribusi"):
+
     view = class_df.rename(
         columns={
             "face_shape": "Face Shape",
@@ -134,7 +135,38 @@ with st.expander("Lihat angka distribusi"):
             "total": "Total",
         }
     )
-    st.dataframe(view, use_container_width=True, hide_index=True)
+
+    table_html = """
+    <div class="trimatch-table-wrap">
+        <table class="trimatch-table">
+            <thead>
+                <tr>
+                    <th>Face Shape</th>
+                    <th>Training</th>
+                    <th>Testing</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+    """
+
+    for _, row in view.iterrows():
+        table_html += f"""
+                <tr>
+                    <td class="shape-name">{row["Face Shape"]}</td>
+                    <td>{row["Training"]}</td>
+                    <td>{row["Testing"]}</td>
+                    <td class="total-value">{row["Total"]}</td>
+                </tr>
+        """
+
+    table_html += """
+            </tbody>
+        </table>
+    </div>
+    """
+
+    st.html(table_html)
 
 st.markdown(
     """
