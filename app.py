@@ -116,60 +116,70 @@ st.html("""
 st.divider()
 section_title("Navigation", "Explore Trimatch")
 
-nav1, nav2, nav3 = st.columns(3, gap="large")
+st.html("""
+<div class="nav-grid">
 
-with nav1:
-    st.html("""
-    <div class="nav-card">
-        <div class="nav-card-icon">📊</div>
-        <div class="nav-card-title">Explore the Data</div>
-        <div class="nav-card-desc">
-            Lihat statistik dan visualisasi utama untuk memahami karakteristik dataset.
+    <a class="nav-card-link" href="/EDA">
+        <div class="nav-card">
+            <div class="nav-card-icon">📊</div>
+
+            <div class="nav-card-title">
+                Explore the Data
+            </div>
+
+            <div class="nav-card-desc">
+                Lihat statistik dan visualisasi utama
+                untuk memahami karakteristik dataset.
+            </div>
+
+            <div class="nav-card-button">
+                Open EDA
+                <span>→</span>
+            </div>
         </div>
-    </div>
-    """)
-
-    st.page_link(
-        "pages/1_EDA.py",
-        label="Open EDA",
-        icon="➡️",
-        use_container_width=True
-    )
+    </a>
 
 
-with nav2:
-    st.html("""
-    <div class="nav-card">
-        <div class="nav-card-icon">🧠</div>
-        <div class="nav-card-title">Model & Performance</div>
-        <div class="nav-card-desc">
-            Pelajari arsitektur model dan lihat hasil evaluasi performa model.
+    <a class="nav-card-link" href="/Model_Performance">
+        <div class="nav-card">
+            <div class="nav-card-icon">🧠</div>
+
+            <div class="nav-card-title">
+                Model & Performance
+            </div>
+
+            <div class="nav-card-desc">
+                Pelajari arsitektur model dan lihat
+                hasil evaluasi performa model.
+            </div>
+
+            <div class="nav-card-button">
+                Open Model Page
+                <span>→</span>
+            </div>
         </div>
-    </div>
-    """)
-
-    st.page_link(
-        "pages/2_Model_Performance.py",
-        label="Open Model Page",
-        icon="➡️",
-        use_container_width=True
-    )
+    </a>
 
 
-with nav3:
-    st.html("""
-    <div class="nav-card">
-        <div class="nav-card-icon">✂️</div>
-        <div class="nav-card-title">Find My Hairstyle</div>
-        <div class="nav-card-desc">
-            Upload foto wajah dan dapatkan prediksi bentuk wajah serta rekomendasi hairstyle.
+    <a class="nav-card-link" href="/Prediction">
+        <div class="nav-card">
+            <div class="nav-card-icon">✂️</div>
+
+            <div class="nav-card-title">
+                Find My Hairstyle
+            </div>
+
+            <div class="nav-card-desc">
+                Upload foto wajah dan dapatkan prediksi
+                bentuk wajah serta rekomendasi hairstyle.
+            </div>
+
+            <div class="nav-card-button">
+                Try Trimatch
+                <span>→</span>
+            </div>
         </div>
-    </div>
-    """)
+    </a>
 
-    st.page_link(
-        "pages/3_Prediction.py",
-        label="Try Trimatch",
-        icon="➡️",
-        use_container_width=True
-    )
+</div>
+""")
