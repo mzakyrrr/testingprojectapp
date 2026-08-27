@@ -606,3 +606,133 @@ header[data-testid="stHeader"] {
         font-size: 2.45rem;
     }
 }
+
+[data-testid="stSidebar"] [data-testid="stPageLink"] {
+    margin-bottom: 0.55rem;
+}
+
+/* area clickable link */
+[data-testid="stSidebar"] [data-testid="stPageLink"] a {
+    display: flex;
+    align-items: center;
+
+    min-height: 52px;
+
+    padding: 0.75rem 1rem !important;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(216, 180, 106, 0.35);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18, 17, 16, 0.88),
+            rgba(34, 27, 22, 0.72)
+        );
+
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.02);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+/* text menu */
+[data-testid="stSidebar"] [data-testid="stPageLink"] p {
+    color: #eee5d9 !important;
+
+    font-weight: 600 !important;
+
+    letter-spacing: 0.015em;
+
+    margin: 0 !important;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* hover */
+[data-testid="stSidebar"] [data-testid="stPageLink"] a:hover {
+
+    transform: translateX(6px);
+
+    border-color: rgba(216, 180, 106, 0.75);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(45, 34, 25, 0.96),
+            rgba(24, 21, 18, 0.96)
+        );
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.38),
+        0 0 18px rgba(216, 180, 106, 0.11),
+        inset 0 1px 0 rgba(255, 235, 190, 0.06);
+}
+
+
+/* text jadi gold saat hover */
+[data-testid="stSidebar"] [data-testid="stPageLink"] a:hover p {
+    color: #f1d89a !important;
+}
+
+
+/* icon */
+[data-testid="stSidebar"] [data-testid="stPageLink"] svg {
+    color: #d8b46a !important;
+
+    margin-right: 0.45rem;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* icon sedikit bergerak saat hover */
+[data-testid="stSidebar"] [data-testid="stPageLink"] a:hover svg {
+
+    color: #f1d89a !important;
+
+    transform: scale(1.08);
+}
+
+/* ACTIVE PAGE */
+[data-testid="stSidebar"]
+[data-testid="stPageLink"]
+a[aria-current="page"] {
+
+    border-color: rgba(241, 216, 154, 0.9);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(216, 180, 106, 0.20),
+            rgba(50, 38, 28, 0.92)
+        );
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.40),
+        0 0 22px rgba(216, 180, 106, 0.16),
+        inset 3px 0 0 #d8b46a;
+}
+
+
+/* active text */
+[data-testid="stSidebar"]
+[data-testid="stPageLink"]
+a[aria-current="page"] p {
+
+    color: #f3dda6 !important;
+
+    font-weight: 700 !important;
+}
