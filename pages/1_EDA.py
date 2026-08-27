@@ -1,7 +1,7 @@
 import streamlit as st
 import altair as alt
 
-from utils.style import apply_global_style, show_logo, page_header, section_title
+from utils.style import apply_global_style, show_logo, show_sidebar_logo, page_header, section_title
 from utils.eda import (
     load_eda_summary,
     class_distribution_df,
