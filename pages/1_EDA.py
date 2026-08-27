@@ -1,4 +1,5 @@
 import streamlit as st
+import altair as alt
 
 from utils.style import apply_global_style, show_logo, page_header, section_title
 from utils.eda import (
@@ -19,7 +20,7 @@ apply_global_style()
 data = load_eda_summary()
 
 with st.sidebar:
-    show_logo(width=165)
+    show_sidebar_logo(width=165)
     st.markdown("### Trimatch")
     st.caption("Your Style, Your Cut")
     st.divider()
@@ -53,8 +54,76 @@ st.divider()
 section_title("Class Distribution", "Distribusi gambar per bentuk wajah")
 
 class_df = class_distribution_df(data)
-plot_df = class_df.set_index("face_shape")[["training", "testing"]]
-st.bar_chart(plot_df)
+
+chart_df = class_df.melt(
+    id_vars="face_shape",
+    value_vars=["training", "testing"],
+    var_name="Dataset",
+    value_name="Jumlah"
+)
+
+chart = (
+    alt.Chart(chart_df)
+    .mark_bar(
+        cornerRadiusTopLeft=5,
+        cornerRadiusTopRight=5
+    )
+    .encode(
+        x=alt.X(
+            "face_shape:N",
+            title=None,
+            axis=alt.Axis(
+                labelColor="#D8D0C5",
+                labelFontSize=13,
+                labelPadding=12
+            )
+        ),
+
+        y=alt.Y(
+            "Jumlah:Q",
+            title="Jumlah Gambar",
+            axis=alt.Axis(
+                labelColor="#BDB3A5",
+                titleColor="#D8D0C5",
+                gridColor="rgba(216,180,106,0.10)"
+            )
+        ),
+
+        color=alt.Color(
+            "Dataset:N",
+            scale=alt.Scale(
+                domain=["training", "testing"],
+                range=["#C89F52", "#F1D89A"]
+            ),
+            legend=alt.Legend(
+                title=None,
+                labelColor="#D8D0C5",
+                orient="bottom"
+            )
+        ),
+
+        tooltip=[
+            alt.Tooltip("face_shape:N", title="Face Shape"),
+            alt.Tooltip("Dataset:N"),
+            alt.Tooltip("Jumlah:Q")
+        ]
+    )
+    .properties(
+        height=380
+    )
+    .configure_view(
+        stroke=None,
+        fill="transparent"
+    )
+    .configure(
+        background="transparent"
+    )
+)
+
+st.altair_chart(
+    chart,
+    use_container_width=True
+)
 
 with st.expander("Lihat angka distribusi"):
     view = class_df.rename(
