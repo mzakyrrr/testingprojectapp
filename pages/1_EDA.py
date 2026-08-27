@@ -112,7 +112,7 @@ chart = (
         height=380,
         padding={
         "left": 0,
-        "right": 0,
+        "right": 30,
         "top": 30,
         "bottom": 0
     }
