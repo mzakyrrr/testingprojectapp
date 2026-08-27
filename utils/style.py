@@ -19,6 +19,12 @@ def show_logo(width=180):
     if logo_path.exists():
         st.image(str(logo_path), width=width)
 
+def show_sidebar_logo(width=180):
+    logo_path = ROOT_DIR / "assets" / "trimatchblackbg.png"
+
+    if logo_path.exists():
+        st.image(str(logo_path), width=width)
+
 def page_header(kicker, title, description):
     st.markdown(
         f"""
