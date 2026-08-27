@@ -58,10 +58,10 @@ with right:
     section_title("Team", "Project members")
     st.write(
         """
-        **Muhammad Cesar Rivaldo**  
-        **Muhammad Rafi Addien**  
-        **Muhammad Zaky Ramadhan**  
-        **Muhammad Zulyandhika**
+        **Muhammad Cesar Rivaldo (Data Analyst)**  
+        **Muhammad Rafi Addien (Data Scientist)**  
+        **Muhammad Zaky Ramadhan (Data Engineer)**  
+        **Muhammad Zulyandhika (Data Engineer, Data Analyst)**
         """
     )
 
