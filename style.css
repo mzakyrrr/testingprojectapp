@@ -1472,3 +1472,122 @@ Tidak menghilangkan CSS sidebar.
 .block-container {
     padding-top: 5rem !important;
 }
+
+/* ============================================================
+   TRIMATCH PREMIUM TABLE
+   ============================================================ */
+
+.trimatch-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+
+    border-radius: 18px;
+
+    border:
+        1px solid
+        rgba(216, 180, 106, 0.24);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18, 17, 16, 0.96),
+            rgba(31, 25, 21, 0.94)
+        );
+
+    box-shadow:
+        0 14px 30px
+        rgba(0, 0, 0, 0.28);
+}
+
+
+/* TABLE */
+
+.trimatch-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    color: #d8d0c5;
+
+    font-size: 0.95rem;
+}
+
+
+/* HEADER */
+
+.trimatch-table thead {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(216, 180, 106, 0.16),
+            rgba(80, 57, 35, 0.30)
+        );
+}
+
+.trimatch-table th {
+    padding: 1rem 1.1rem;
+
+    text-align: left;
+
+    color: #f1d89a;
+
+    font-weight: 700;
+
+    letter-spacing: 0.04em;
+
+    border-bottom:
+        1px solid
+        rgba(216, 180, 106, 0.30);
+}
+
+
+/* CELL */
+
+.trimatch-table td {
+    padding: 0.95rem 1.1rem;
+
+    border-bottom:
+        1px solid
+        rgba(216, 180, 106, 0.10);
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease;
+}
+
+
+/* ROW HOVER */
+
+.trimatch-table tbody tr:hover td {
+    background:
+        rgba(216, 180, 106, 0.07);
+
+    color: #fff0c5;
+}
+
+
+/* FIRST COLUMN */
+
+.trimatch-table .shape-name {
+    color: #f7f0e6;
+
+    font-weight: 700;
+
+    text-transform: capitalize;
+}
+
+
+/* TOTAL COLUMN */
+
+.trimatch-table .total-value {
+    color: #f1d89a;
+
+    font-weight: 700;
+}
+
+
+/* LAST ROW */
+
+.trimatch-table tbody tr:last-child td {
+    border-bottom: none;
+}
