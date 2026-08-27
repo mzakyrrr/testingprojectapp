@@ -36,7 +36,7 @@ left, right = st.columns([1.35, 0.65], gap="large")
 # =========================
 # SECTION 01 - LEFT
 # =========================
-    with left:
+with left:
     section_title("01", "Kenapa Trimatch?")
 
     st.html("""
