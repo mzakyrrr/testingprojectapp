@@ -12,7 +12,7 @@ st.set_page_config(
 apply_global_style()
 
 with st.sidebar:
-    show_logo(width=165)
+    show_sidebar_logo(width=165)
     st.markdown("### Trimatch")
     st.caption("Your Style, Your Cut")
     st.divider()
