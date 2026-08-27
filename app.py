@@ -41,7 +41,7 @@ with left:
         "Trimatch membantu proses tersebut melalui klasifikasi gambar wajah."
     )
 
-    ssection_title("02", "Cara Kerja Aplikasi")
+    section_title("02", "Cara Kerja Aplikasi")
 
 st.markdown(
     """
