@@ -116,23 +116,60 @@ st.html("""
 st.divider()
 section_title("Navigation", "Explore Trimatch")
 
-a, b, c = st.columns(3)
-with a:
-    st.markdown("#### 📊 Explore the Data")
-    st.write("Lihat statistik dan visualisasi utama dataset.")
-    st.page_link("pages/1_EDA.py", label="Open EDA")
+nav1, nav2, nav3 = st.columns(3, gap="large")
 
-with b:
-    st.markdown("#### 🧠 Model & Performance")
-    st.write("Lihat arsitektur model dan hasil evaluasi final.")
-    st.page_link("pages/2_Model_Performance.py", label="Open Model Page")
+with nav1:
+    st.html("""
+    <div class="nav-card">
+        <div class="nav-card-icon">📊</div>
+        <div class="nav-card-title">Explore the Data</div>
+        <div class="nav-card-desc">
+            Lihat statistik dan visualisasi utama untuk memahami karakteristik dataset.
+        </div>
+    </div>
+    """)
 
-with c:
-    st.markdown("#### ✂️ Find My Hairstyle")
-    st.write("Upload foto dan jalankan prediksi ketika model final tersedia.")
-    st.page_link("pages/3_Prediction.py", label="Try Trimatch")
+    st.page_link(
+        "pages/1_EDA.py",
+        label="Open EDA",
+        icon="→",
+        use_container_width=True
+    )
 
-st.info(
-    "Model final belum dimasukkan. Struktur aplikasi tetap bisa dikembangkan sekarang, "
-    "lalu model.pkl final tinggal ditambahkan ke root project."
-)
+
+with nav2:
+    st.html("""
+    <div class="nav-card">
+        <div class="nav-card-icon">🧠</div>
+        <div class="nav-card-title">Model & Performance</div>
+        <div class="nav-card-desc">
+            Pelajari arsitektur model dan lihat hasil evaluasi performa model.
+        </div>
+    </div>
+    """)
+
+    st.page_link(
+        "pages/2_Model_Performance.py",
+        label="Open Model Page",
+        icon="→",
+        use_container_width=True
+    )
+
+
+with nav3:
+    st.html("""
+    <div class="nav-card">
+        <div class="nav-card-icon">✂️</div>
+        <div class="nav-card-title">Find My Hairstyle</div>
+        <div class="nav-card-desc">
+            Upload foto wajah dan dapatkan prediksi bentuk wajah serta rekomendasi hairstyle.
+        </div>
+    </div>
+    """)
+
+    st.page_link(
+        "pages/3_Prediction.py",
+        label="Try Trimatch",
+        icon="→",
+        use_container_width=True
+    )
