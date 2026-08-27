@@ -282,7 +282,13 @@ with right:
         )
         .properties(
             width="container",
-            height=300
+            height=300,
+            padding={
+                "left": 10,
+                "right": 20,
+                "top": 10,
+                "bottom": 10
+            }
         )
         .configure_view(
             stroke=None,
