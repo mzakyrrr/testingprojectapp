@@ -172,24 +172,36 @@ def render_probability_bars(probabilities: np.ndarray):
     pairs = list(zip(labels, probabilities.tolist()))
     pairs = sorted(pairs, key=lambda x: x[1], reverse=True)
 
-    html = '<div class="probability-wrap">'
+    rows = []
+
     for label, prob in pairs:
         width = max(prob * 100, 4)
-        html += f"""
-        <div class="prob-row">
-            <div class="prob-top">
-                <span class="prob-label">{label}</span>
-                <span class="prob-value">{prob:.1%}</span>
-            </div>
-            <div class="prob-track">
-                <div class="prob-fill" style="width: {width:.2f}%;"></div>
-            </div>
-        </div>
-        """
-    html += "</div>"
 
-    st.markdown(html, unsafe_allow_html=True)
+        rows.append(
+            f"""
+            <div class="prob-row">
+                <div class="prob-top">
+                    <span class="prob-label">{label}</span>
+                    <span class="prob-value">{prob:.1%}</span>
+                </div>
 
+                <div class="prob-track">
+                    <div
+                        class="prob-fill"
+                        style="width:{width:.2f}%;">
+                    </div>
+                </div>
+            </div>
+            """
+        )
+
+    html = f"""
+    <div class="probability-wrap">
+        {''.join(rows)}
+    </div>
+    """
+
+    st.html(html)
 
 def render_style_chips(styles: list[str]):
     html = '<div class="style-chip-wrap">'
