@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from PIL import Image
 
-from utils.style import apply_global_style, show_logo, page_header
+from utils.style import apply_global_style, show_logo, show_sidebar_logo, page_header
 from utils.config import CLASS_NAMES, HAIRSTYLE_RECOMMENDATIONS
 from utils.inference import load_model, predict
 
@@ -15,7 +15,7 @@ st.set_page_config(
 apply_global_style()
 
 with st.sidebar:
-    show_logo(width=165)
+    show_sidebar_logo(width=165)
     st.markdown("### Trimatch")
     st.caption("Your Style, Your Cut")
     st.divider()
