@@ -867,3 +867,71 @@ a[aria-current="page"] p {
     color: #f1d89a;
     font-weight: 700;
 }
+
+/* ============================================================
+   SECTION 01 - WHY TRIMATCH CARD
+   ============================================================ */
+
+.why-card {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 250px;
+    padding: 1.8rem 1.7rem;
+
+    border-radius: 22px;
+    border: 1px solid rgba(216, 180, 106, 0.22);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(24, 21, 19, 0.96),
+            rgba(39, 30, 24, 0.90)
+        );
+
+    box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.28);
+
+    display: flex;
+    align-items: center;
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+}
+
+.why-card::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    right: -30px;
+    bottom: -30px;
+    background:
+        radial-gradient(
+            circle,
+            rgba(216, 180, 106, 0.18),
+            transparent 68%
+        );
+}
+
+.why-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(216, 180, 106, 0.48);
+    box-shadow:
+        0 20px 42px rgba(0, 0, 0, 0.34);
+}
+
+.why-card-text {
+    font-size: 1.18rem;
+    line-height: 1.95;
+    color: #ddd4c8;
+    letter-spacing: 0.005em;
+}
+
+.why-card-text strong {
+    color: #f1d89a;
+    font-weight: 700;
+}
