@@ -1466,3 +1466,9 @@ Tidak menghilangkan CSS sidebar.
 
     min-height: 360px;
 }
+
+/* FIX CONTENT KEPEPET HEADER */
+
+.block-container {
+    padding-top: 5rem !important;
+}
