@@ -39,12 +39,15 @@ left, right = st.columns([1.2, 1], gap="large")
 with left:
     section_title("01", "Kenapa Trimatch?")
 
-    st.write(
-        "Menentukan bentuk wajah sendiri tidak selalu mudah karena batas visual "
-        "antara ovale, rectangular, round, dan square dapat terlihat mirip. "
-        "Trimatch membantu proses tersebut melalui klasifikasi gambar wajah."
-    )
-
+    st.html("""
+    <div class="why-trimatch-text">
+        Menentukan bentuk wajah sendiri tidak selalu mudah karena batas visual
+        antara <strong>ovale</strong>, <strong>rectangular</strong>,
+        <strong>round</strong>, dan <strong>square</strong> dapat terlihat mirip.
+        Trimatch membantu proses tersebut melalui klasifikasi gambar wajah
+        untuk memberikan rekomendasi hairstyle yang lebih sesuai.
+    </div>
+    """)
 
 # =========================
 # SECTION 01 - RIGHT
