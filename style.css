@@ -736,3 +736,110 @@ a[aria-current="page"] p {
 
     font-weight: 700 !important;
 }
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.process-card {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 260px;
+    padding: 1.6rem 1.4rem;
+
+    border-radius: 22px;
+    border: 1px solid rgba(216, 180, 106, 0.22);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(24, 21, 19, 0.96),
+            rgba(39, 30, 24, 0.90)
+        );
+
+    box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.28);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+}
+
+.process-card::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    right: -28px;
+    bottom: -28px;
+    background:
+        radial-gradient(
+            circle,
+            rgba(216, 180, 106, 0.18),
+            transparent 68%
+        );
+}
+
+.process-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(216, 180, 106, 0.48);
+    box-shadow:
+        0 20px 42px rgba(0, 0, 0, 0.34);
+}
+
+.process-step {
+    font-family: "Playfair Display", serif;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: #f1d89a;
+    margin-bottom: 0.9rem;
+}
+
+.process-title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: #f7f0e6;
+    margin-bottom: 0.9rem;
+    line-height: 1.3;
+}
+
+.process-desc {
+    max-width: 240px;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #d6cec2;
+    word-break: normal;
+    overflow-wrap: normal;
+}
+
+/* responsive */
+@media (max-width: 1100px) {
+    .process-grid {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .process-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .process-card {
+        min-height: 220px;
+    }
+}
