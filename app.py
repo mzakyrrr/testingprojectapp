@@ -43,36 +43,36 @@ with left:
 
     section_title("02", "Cara Kerja Aplikasi")
 
-st.markdown(
-    """
-    <div class="process-grid">
-        <div class="process-card">
-            <div class="process-step">01</div>
-            <div class="process-title">Input Foto</div>
-            <div class="process-desc">
-                Unggah gambar atau gunakan kamera untuk memulai analisis.
-            </div>
-        </div>
+st.html("""
+<div class="process-grid">
 
-        <div class="process-card">
-            <div class="process-step">02</div>
-            <div class="process-title">Klasifikasi</div>
-            <div class="process-desc">
-                Model menganalisis gambar dan menghasilkan probabilitas empat bentuk wajah.
-            </div>
-        </div>
-
-        <div class="process-card">
-            <div class="process-step">03</div>
-            <div class="process-title">Rekomendasi</div>
-            <div class="process-desc">
-                Hasil prediksi digunakan sebagai dasar rekomendasi hairstyle yang sesuai.
-            </div>
+    <div class="process-card">
+        <div class="process-step">01</div>
+        <div class="process-title">Input Foto</div>
+        <div class="process-desc">
+            Unggah gambar atau gunakan kamera untuk memulai analisis.
         </div>
     </div>
-    """,
-    unsafe_allow_html=True
-)
+
+    <div class="process-card">
+        <div class="process-step">02</div>
+        <div class="process-title">Klasifikasi</div>
+        <div class="process-desc">
+            Model menganalisis gambar dan menghasilkan probabilitas empat bentuk wajah.
+        </div>
+    </div>
+
+    <div class="process-card">
+        <div class="process-step">03</div>
+        <div class="process-title">Rekomendasi</div>
+        <div class="process-desc">
+            Hasil prediksi digunakan sebagai dasar rekomendasi hairstyle yang sesuai.
+        </div>
+    </div>
+
+</div>
+""")
+
 with right:
     show_logo(width=340)
     st.markdown("### Face-shape classes")
