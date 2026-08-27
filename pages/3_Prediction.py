@@ -377,7 +377,7 @@ if st.session_state.prediction_result is not None:
             )
 
     with result_right:
-        section_title("Probability", "Distribusi probabilitas kelas")
+        section_title("Probability", "Distribusi Probabilitas Kelas")
         render_probability_bars(np.asarray(probs))
 
     st.divider()
