@@ -132,7 +132,7 @@ with nav1:
     st.page_link(
         "pages/1_EDA.py",
         label="Open EDA",
-        icon="→",
+        icon="➡️",
         use_container_width=True
     )
 
@@ -151,7 +151,7 @@ with nav2:
     st.page_link(
         "pages/2_Model_Performance.py",
         label="Open Model Page",
-        icon="→",
+        icon="➡️",
         use_container_width=True
     )
 
@@ -170,6 +170,6 @@ with nav3:
     st.page_link(
         "pages/3_Prediction.py",
         label="Try Trimatch",
-        icon="→",
+        icon="➡️",
         use_container_width=True
     )
