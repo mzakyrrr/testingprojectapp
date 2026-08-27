@@ -51,6 +51,24 @@ st.caption(
 
 st.divider()
 
+section_title(
+    "Sample Images",
+    "Contoh wajah pada setiap kelas"
+)
+
+st.image(
+    "assets/samplephoto.jpg",
+    caption="Contoh gambar untuk kelas ovale, rectangular, round, dan square.",
+    use_container_width=True
+)
+
+st.caption(
+    "Visual ini menampilkan contoh wajah dari masing-masing kelas pada dataset "
+    "untuk memberikan gambaran karakteristik visual tiap bentuk wajah."
+)
+
+st.divider()
+
 section_title("Class Distribution", "Distribusi gambar per bentuk wajah")
 
 class_df = class_distribution_df(data)
