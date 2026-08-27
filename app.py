@@ -31,7 +31,7 @@ page_header(
     "dan menghubungkannya dengan rekomendasi gaya rambut.",
 )
 
-left, right = st.columns([1.2, 1], gap="large")
+left, right = st.columns([1.35, 0.65], gap="large")
 
 # =========================
 # SECTION 01 - LEFT
@@ -53,7 +53,7 @@ with left:
 # SECTION 01 - RIGHT
 # =========================
 with right:
-    show_logo(width=340)
+    show_logo(width=300)
 
     st.markdown("### Face-shape Classes")
 
