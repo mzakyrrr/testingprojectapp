@@ -843,3 +843,27 @@ a[aria-current="page"] p {
         min-height: 220px;
     }
 }
+
+/* ============================================================
+   WHY TRIMATCH SECTION
+   ============================================================ */
+
+.why-trimatch-text {
+    max-width: 95%;
+
+    font-size: 1.28rem;
+    line-height: 1.85;
+
+    color: #ddd4c8;
+
+    margin-top: 1rem;
+
+    padding-right: 1.5rem;
+
+    letter-spacing: 0.005em;
+}
+
+.why-trimatch-text strong {
+    color: #f1d89a;
+    font-weight: 700;
+}
