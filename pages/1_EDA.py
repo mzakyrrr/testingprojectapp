@@ -109,7 +109,13 @@ chart = (
         ]
     )
     .properties(
-        height=380
+        height=380,
+        padding={
+        "left": 10,
+        "right": 10,
+        "top": 30,
+        "bottom": 10
+    }
     )
     .configure_view(
         stroke=None,
