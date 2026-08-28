@@ -1,7 +1,14 @@
 import streamlit as st
 import altair as alt
 
-from utils.style import apply_global_style, show_logo, show_sidebar_logo, page_header, section_title
+from utils.style import (
+    apply_global_style,
+    show_logo,
+    show_sidebar_logo,
+    page_header,
+    section_title,
+)
+
 from utils.eda import (
     load_eda_summary,
     class_distribution_df,
@@ -33,43 +40,59 @@ with st.sidebar:
 page_header(
     "Explore the Data",
     "Exploratory Data Analysis",
-    "Statistik dan visualisasi utama dari EDA_full.ipynb. "
-    "Dataset mentah tidak perlu dimuat ulang saat aplikasi dijalankan.",
+    "Key statistics and visualizations extracted from EDA_full.ipynb. "
+    "The raw dataset does not need to be reloaded when the application runs.",
 )
 
-section_title("Dataset Overview", "Gambaran umum dataset")
+# =========================================================
+# DATASET OVERVIEW
+# =========================================================
+section_title("Dataset Overview", "Dataset at a Glance")
+
 m1, m2, m3, m4 = st.columns(4)
-m1.metric("Total valid images", f'{data["raw_total"]:,}')
-m2.metric("Training set", f'{data["train_total"]:,}')
-m3.metric("Testing set", f'{data["test_total"]:,}')
-m4.metric("Corrupt images", data["corrupt_images"])
+
+m1.metric("Total Valid Images", f'{data["raw_total"]:,}')
+m2.metric("Training Set", f'{data["train_total"]:,}')
+m3.metric("Testing Set", f'{data["test_total"]:,}')
+m4.metric("Corrupt Images", data["corrupt_images"])
 
 st.caption(
-    "EDA mencatat seluruh gambar yang terbaca berada pada mode RGB. "
-    "Distribusi kelas secara total relatif seimbang."
+    "All readable images in the EDA were recorded in RGB mode. "
+    "Overall, the class distribution is relatively balanced."
 )
 
 st.divider()
 
+
+# =========================================================
+# SAMPLE IMAGES
+# =========================================================
 section_title(
     "Sample Images",
-    "Contoh wajah pada setiap kelas"
+    "Examples from Each Face Shape Class"
 )
 
 st.image(
     "assets/samplephoto.jpg",
-    caption="Contoh gambar untuk kelas ovale, rectangular, round, dan square.",
+    caption="Sample images from the ovale, rectangular, round, and square classes.",
     use_container_width=True
 )
 
 st.caption(
-    "Visual ini menampilkan contoh wajah dari masing-masing kelas pada dataset "
-    "untuk memberikan gambaran karakteristik visual tiap bentuk wajah."
+    "These samples provide a visual overview of the facial characteristics "
+    "represented by each class in the dataset."
 )
 
 st.divider()
 
-section_title("Class Distribution", "Distribusi gambar per bentuk wajah")
+
+# =========================================================
+# CLASS DISTRIBUTION
+# =========================================================
+section_title(
+    "Class Distribution",
+    "Images per Face Shape"
+)
 
 class_df = class_distribution_df(data)
 
@@ -77,7 +100,7 @@ chart_df = class_df.melt(
     id_vars="face_shape",
     value_vars=["training", "testing"],
     var_name="Dataset",
-    value_name="Jumlah"
+    value_name="Count"
 )
 
 chart = (
@@ -98,8 +121,8 @@ chart = (
         ),
 
         y=alt.Y(
-            "Jumlah:Q",
-            title="Jumlah Gambar",
+            "Count:Q",
+            title="Number of Images",
             axis=alt.Axis(
                 labelColor="#BDB3A5",
                 titleColor="#D8D0C5",
@@ -123,17 +146,17 @@ chart = (
         tooltip=[
             alt.Tooltip("face_shape:N", title="Face Shape"),
             alt.Tooltip("Dataset:N"),
-            alt.Tooltip("Jumlah:Q")
+            alt.Tooltip("Count:Q", title="Number of Images")
         ]
     )
     .properties(
         height=380,
         padding={
-        "left": 0,
-        "right": 30,
-        "top": 30,
-        "bottom": 0
-    }
+            "left": 0,
+            "right": 30,
+            "top": 30,
+            "bottom": 0
+        }
     )
     .configure_view(
         stroke=None,
@@ -149,7 +172,7 @@ st.altair_chart(
     use_container_width=True
 )
 
-with st.expander("Lihat angka distribusi"):
+with st.expander("View Distribution Values"):
 
     view = class_df.rename(
         columns={
@@ -194,14 +217,21 @@ with st.expander("Lihat angka distribusi"):
 
 st.markdown(
     """
-    **Insight:** jumlah data antarkelas relatif seimbang secara total. Namun,
-    komposisi training dan testing tidak identik pada setiap kelas.
+    **Insight:** The total number of images is relatively balanced across classes.
+    However, the training and testing proportions are not identical for every class.
     """
 )
 
 st.divider()
 
-section_title("Image Dimensions", "Karakteristik resolusi gambar")
+
+# =========================================================
+# IMAGE DIMENSIONS
+# =========================================================
+section_title(
+    "Image Dimensions",
+    "Image Resolution Characteristics"
+)
 
 left, right = st.columns([1, 1.15], gap="large")
 
@@ -248,18 +278,18 @@ with left:
     st.html(table_html)
 
     st.metric(
-        "Unique resolutions",
+        "Unique Resolutions",
         data["quality"]["unique_resolutions"]
     )
 
     st.caption(
-        "Dataset memiliki variasi resolusi yang besar, sehingga proses resize "
-        "sebelum masuk ke model menjadi penting."
+        "The dataset contains a wide range of image resolutions, making image "
+        "resizing an important preprocessing step before data is passed to the model."
     )
 
 
 with right:
-    st.markdown("**10 resolusi paling umum**")
+    st.markdown("**10 Most Common Resolutions**")
 
     top_df = top_resolutions_df(data)
 
@@ -282,9 +312,10 @@ with right:
                     labelPadding=8
                 )
             ),
+
             y=alt.Y(
                 "count:Q",
-                title="Jumlah Gambar",
+                title="Number of Images",
                 axis=alt.Axis(
                     labelColor="#BDB3A5",
                     titleColor="#D8D0C5",
@@ -293,6 +324,7 @@ with right:
                     domainColor="#5A4932"
                 )
             ),
+
             tooltip=[
                 alt.Tooltip(
                     "resolution:N",
@@ -300,7 +332,7 @@ with right:
                 ),
                 alt.Tooltip(
                     "count:Q",
-                    title="Jumlah"
+                    title="Count"
                 )
             ]
         )
@@ -316,7 +348,7 @@ with right:
         )
         .configure_view(
             stroke=None,
-            fill="#transparent"
+            fill="transparent"
         )
         .configure(
             background="transparent"
@@ -327,26 +359,43 @@ with right:
         resolution_chart,
         use_container_width=True
     )
-    
+
 st.divider()
 
-section_title("Image File Size", "Ukuran file dan outlier")
+
+# =========================================================
+# IMAGE FILE SIZE
+# =========================================================
+section_title(
+    "Image File Size",
+    "File Size Distribution and Outliers"
+)
 
 fs = data["file_size"]
+
 c1, c2, c3, c4 = st.columns(4)
+
 c1.metric("Mean", f'{fs["mean_kb"]:.1f} KB')
 c2.metric("Median", f'{fs["median_kb"]:.1f} KB')
 c3.metric("Maximum", f'{fs["max_kb"]:,.1f} KB')
-c4.metric("IQR outliers", fs["iqr_outliers"])
+c4.metric("IQR Outliers", fs["iqr_outliers"])
 
 st.write(
-    "Distribusi ukuran file cukup lebar. Nilai median jauh di bawah nilai maksimum, "
-    "menunjukkan adanya sejumlah file berukuran jauh lebih besar dari mayoritas data."
+    "The image file size distribution is relatively wide. "
+    "The median is much lower than the maximum value, indicating that several "
+    "files are considerably larger than the majority of the dataset."
 )
 
 st.divider()
 
-section_title("Color & Brightness", "Karakteristik warna rata-rata")
+
+# =========================================================
+# COLOR & BRIGHTNESS
+# =========================================================
+section_title(
+    "Color & Brightness",
+    "Average Color Characteristics"
+)
 
 color_df = color_stats_df(data)
 
@@ -354,7 +403,6 @@ color_df = color_stats_df(data)
 # =========================================================
 # RGB CHART
 # =========================================================
-
 rgb_chart_df = color_df.melt(
     id_vars="face_shape",
     value_vars=["mean_r", "mean_g", "mean_b"],
@@ -424,7 +472,6 @@ rgb_chart = (
             )
         ]
     )
-
     .properties(
         width="container",
         height=300,
@@ -435,12 +482,10 @@ rgb_chart = (
             "bottom": 10
         }
     )
-
     .configure_view(
         stroke=None,
         fill="transparent"
     )
-
     .configure(
         background="transparent"
     )
@@ -455,7 +500,6 @@ st.altair_chart(
 # =========================================================
 # BRIGHTNESS CHART
 # =========================================================
-
 brightness_chart = (
     alt.Chart(color_df)
     .mark_line(
@@ -469,7 +513,6 @@ brightness_chart = (
             size=110
         )
     )
-
     .encode(
         x=alt.X(
             "face_shape:N",
@@ -484,13 +527,10 @@ brightness_chart = (
         y=alt.Y(
             "brightness:Q",
             title="Mean Brightness",
-
-            # SKALA DIPERSEMPIT
             scale=alt.Scale(
                 domain=[110, 121],
                 zero=False
             ),
-
             axis=alt.Axis(
                 labelColor="#BDB3A5",
                 titleColor="#D8D0C5",
@@ -512,7 +552,6 @@ brightness_chart = (
             )
         ]
     )
-
     .properties(
         width="container",
         height=260,
@@ -523,12 +562,10 @@ brightness_chart = (
             "bottom": 10
         }
     )
-
     .configure_view(
         stroke=None,
         fill="transparent"
     )
-
     .configure(
         background="transparent"
     )
@@ -539,38 +576,72 @@ st.altair_chart(
     use_container_width=True
 )
 
-
 st.caption(
-    "Statistik warna pada notebook EDA dihitung dari sampel gambar per kelas."
+    "The color statistics in the EDA notebook were calculated from image samples "
+    "from each class."
 )
+
 st.divider()
 
-section_title("Data Quality", "Duplicate dan pemeriksaan gambar bermasalah")
+
+# =========================================================
+# DATA QUALITY
+# =========================================================
+section_title(
+    "Data Quality",
+    "Duplicate and Image Quality Checks"
+)
 
 dup = data["duplicates"]
+
 q1, q2, q3, q4 = st.columns(4)
-q1.metric("Exact duplicate groups", dup["exact_duplicate_groups"])
-q2.metric("Duplicate files", dup["duplicate_files"])
-q3.metric("Cross-split leakage", dup["cross_split_leakage"])
-q4.metric("Conflicting labels", dup["conflicting_duplicate_labels"])
+
+q1.metric(
+    "Exact Duplicate Groups",
+    dup["exact_duplicate_groups"]
+)
+
+q2.metric(
+    "Duplicate Files",
+    dup["duplicate_files"]
+)
+
+q3.metric(
+    "Cross-Split Leakage",
+    dup["cross_split_leakage"]
+)
+
+q4.metric(
+    "Conflicting Labels",
+    dup["conflicting_duplicate_labels"]
+)
 
 quality = data["quality"]
+
 q5, q6 = st.columns(2)
-q5.metric("Images < 50 px", quality["images_under_50px"])
-q6.metric("Extreme aspect ratio", quality["extreme_aspect_ratio"])
+
+q5.metric(
+    "Images < 50 px",
+    quality["images_under_50px"]
+)
+
+q6.metric(
+    "Extreme Aspect Ratio",
+    quality["extreme_aspect_ratio"]
+)
 
 st.success(
-    "Tidak ditemukan exact duplicate yang menyeberang dari training_set ke testing_set "
-    "dan tidak ditemukan exact duplicate dengan label kelas yang berbeda."
+    "No exact duplicates were found crossing from the training set into the testing set, "
+    "and no exact duplicates were found with conflicting class labels."
 )
 
 st.markdown(
     """
-    **Key findings**
-    - Dataset awal berisi 1.312 gambar valid dan tidak ditemukan file corrupt.
-    - Distribusi kelas relatif seimbang secara total.
-    - Terdapat variasi resolusi yang besar.
-    - Exact duplicate ditemukan di dalam dataset, tetapi tidak melintasi split.
-    - Tidak ditemukan gambar yang sangat kecil atau aspect ratio ekstrem berdasarkan threshold EDA.
+    **Key Findings**
+    - The initial dataset contains 1,312 valid images with no corrupt files detected.
+    - The overall class distribution is relatively balanced.
+    - Image resolutions vary substantially across the dataset.
+    - Exact duplicates exist within the dataset, but none cross between the training and testing splits.
+    - No extremely small images or extreme aspect ratios were detected based on the EDA thresholds.
     """
 )
