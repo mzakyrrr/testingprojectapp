@@ -1,6 +1,12 @@
 import streamlit as st
 
-from utils.style import apply_global_style, show_logo, show_sidebar_logo, page_header, section_title
+from utils.style import (
+    apply_global_style,
+    show_logo,
+    show_sidebar_logo,
+    page_header,
+    section_title,
+)
 
 st.set_page_config(
     page_title="Trimatch | Your Style, Your Cut",
@@ -27,8 +33,8 @@ with st.sidebar:
 page_header(
     "Trimatch",
     "Your Style, Your Cut",
-    "Aplikasi computer vision untuk membantu mengidentifikasi bentuk wajah pria "
-    "dan menghubungkannya dengan rekomendasi gaya rambut.",
+    "A computer vision application designed to help identify men's face shapes "
+    "and connect them with suitable hairstyle recommendations.",
 )
 
 left, right = st.columns([1.35, 0.65], gap="large")
@@ -37,16 +43,16 @@ left, right = st.columns([1.35, 0.65], gap="large")
 # SECTION 01 - LEFT
 # =========================
 with left:
-    section_title("01", "Kenapa Trimatch?")
+    section_title("01", "Why Trimatch?")
 
     st.html("""
     <div class="why-card">
         <div class="why-card-text">
-            Menentukan bentuk wajah sendiri tidak selalu mudah karena batas visual
-            antara <strong>ovale</strong>, <strong>rectangular</strong>,
-            <strong>round</strong>, dan <strong>square</strong> dapat terlihat mirip.
-            Trimatch membantu proses tersebut melalui klasifikasi gambar wajah
-            untuk memberikan rekomendasi hairstyle yang lebih sesuai.
+            Identifying your own face shape is not always easy because the visual
+            differences between <strong>ovale</strong>, <strong>rectangular</strong>,
+            <strong>round</strong>, and <strong>square</strong> can sometimes appear similar.
+            Trimatch helps simplify this process by classifying facial images and
+            providing hairstyle recommendations that better match the predicted face shape.
         </div>
     </div>
     """)
@@ -69,7 +75,7 @@ with right:
 # =========================
 st.markdown("<br>", unsafe_allow_html=True)
 
-section_title("02", "Cara Kerja Aplikasi")
+section_title("02", "How Trimatch Works")
 
 st.html("""
 <div class="process-grid">
@@ -78,11 +84,11 @@ st.html("""
         <div class="process-step">01</div>
 
         <div class="process-title">
-            Input Foto
+            Photo Input
         </div>
 
         <div class="process-desc">
-            Unggah gambar atau gunakan kamera untuk memulai analisis.
+            Upload an image or use your camera to begin the analysis.
         </div>
     </div>
 
@@ -90,11 +96,11 @@ st.html("""
         <div class="process-step">02</div>
 
         <div class="process-title">
-            Klasifikasi
+            Classification
         </div>
 
         <div class="process-desc">
-            Model menganalisis gambar dan menghasilkan probabilitas empat bentuk wajah.
+            The model analyzes the image and produces probabilities for four face-shape classes.
         </div>
     </div>
 
@@ -102,11 +108,11 @@ st.html("""
         <div class="process-step">03</div>
 
         <div class="process-title">
-            Rekomendasi
+            Recommendation
         </div>
 
         <div class="process-desc">
-            Hasil prediksi digunakan sebagai dasar rekomendasi hairstyle yang sesuai.
+            The prediction result is used as the basis for recommending suitable hairstyles.
         </div>
     </div>
 
@@ -128,8 +134,8 @@ st.html("""
             </div>
 
             <div class="nav-card-desc">
-                Lihat statistik dan visualisasi utama
-                untuk memahami karakteristik dataset.
+                View key statistics and visualizations
+                to better understand the dataset.
             </div>
 
             <div class="nav-card-button">
@@ -149,8 +155,8 @@ st.html("""
             </div>
 
             <div class="nav-card-desc">
-                Pelajari arsitektur model dan lihat
-                hasil evaluasi performa model.
+                Explore the model architecture and review
+                its performance evaluation results.
             </div>
 
             <div class="nav-card-button">
@@ -170,8 +176,8 @@ st.html("""
             </div>
 
             <div class="nav-card-desc">
-                Upload foto wajah dan dapatkan prediksi
-                bentuk wajah serta rekomendasi hairstyle.
+                Upload a facial image to get a face-shape
+                prediction and hairstyle recommendations.
             </div>
 
             <div class="nav-card-button">
